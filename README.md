@@ -1,3 +1,0 @@
-# ddupdate
-
-The ddupdate package

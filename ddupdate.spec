@@ -1,4 +1,4 @@
-%global gittag      0.2.0
+%global gittag      0.5.2
 #global commit      eb302484417d85cbf497958ba2a651f738ad7420
 
 %global shortcommit %{?commit:%(c=%{commit}; echo ${c:0:7})}%{!?commit:%nil}
@@ -6,7 +6,7 @@
 %global srcdir      %{?gittag}%{?commit}
 
 Name:           ddupdate
-Version:        0.2.0
+Version:        0.5.2
 Release:        1%{?commit:.%{shortcommit}}%{?dist}
 Summary:        Tool updating DNS data for dynamic IP addresses
 
@@ -22,6 +22,7 @@ BuildRequires:  systemd
 Requires(pre):  shadow-utils
 Requires:       python%{python3_pkgversion}-straight-plugin
 Requires:       /usr/sbin/ip
+Requires:       sudo
 
 %{?systemd_requires}
 
@@ -36,7 +37,7 @@ address, and only attempts the update if the address actually is changed.
 The tool has a plugin structure with plugins for obtaining the actual
 address (typically hardware-dependent) and to update it (service depen‐
 dent). For supported services, it's a linux-centric, user-friendly and
-flexible alternative to the ubiquotious ddclient.
+flexible alternative to the ubiquotous ddclient.
 
 ddupdate is distributed with systemd support to run at regular intervals,
 and with NetworkManager templates to run when interfaces goes up or down.
@@ -55,7 +56,7 @@ sed -i 's|/lib/systemd/system|%{_unitdir}|' setup.py
 
 %install
 %py3_install
-rm -rf $RPM_BUILD_ROOT%{_pkgdocdir}/*
+rm -rf $RPM_BUILD_ROOT%{_docdir}/ddupdate*/*
 
 
 %pre
@@ -76,16 +77,23 @@ getent passwd ddupdate >/dev/null || \
 
 %files
 %license LICENSE.txt
-%doc README.md NEWS CONTRIBUTE.md
+%doc README.md NEWS CONTRIBUTE.md CONFIGURATION.md
 %{_bindir}/ddupdate
+%{_bindir}/ddupdate-config
 %config(noreplace) /etc/ddupdate.conf
 %{_unitdir}/ddupdate.*
 %{_datadir}/ddupdate
+%{_datadir}/bash-completion/completions/ddupdate
 %{_mandir}/man8/ddupdate.8*
+%{_mandir}/man8/ddupdate-config.8*
+%{_mandir}/man5/ddupdate.conf.5*
 %{python3_sitelib}/*
 
 
 %changelog
+* Sun Jan 28 2018 Alec Leamas <leamas.alec@gmail.com> - 0.5.2-1
+- New upstream release
+
 * Sat Jan 13 2018 Alec Leamas <leamas.alec@gmail.com> - 0.2.0-1
 - New upstream release.
 

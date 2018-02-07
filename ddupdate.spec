@@ -7,7 +7,7 @@
 
 Name:           ddupdate
 Version:        0.5.2
-Release:        1%{?commit:.%{shortcommit}}%{?dist}
+Release:        2%{?commit:.%{shortcommit}}%{?dist}
 Summary:        Tool updating DNS data for dynamic IP addresses
 
 Group:          Applications/System
@@ -91,6 +91,9 @@ getent passwd ddupdate >/dev/null || \
 
 
 %changelog
+* Wed Feb 07 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.5.2-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
+
 * Sun Jan 28 2018 Alec Leamas <leamas.alec@gmail.com> - 0.5.2-1
 - New upstream release
 

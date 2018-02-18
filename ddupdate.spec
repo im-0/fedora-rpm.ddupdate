@@ -9,7 +9,7 @@
 
 Name:           ddupdate
 Version:        0.6.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Tool updating DNS data for dynamic IP addresses
 
 Group:          Applications/System
@@ -22,7 +22,6 @@ BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
 BuildRequires:  systemd
 BuildRequires:  /usr/bin/pkg-config
-Requires:       python%{python3_pkgversion}-straight-plugin
 Requires:       /usr/sbin/ip
 Requires:       sudo
 
@@ -75,6 +74,9 @@ sed -i 's|/lib/systemd/system|%{_unitdir}|' setup.py
 
 
 %changelog
+* Sun Feb 18 2018 Alec Leamas <leamas.alec@gmail.com> - 0.6.0-2
+- Drop redundant R: python3-straight-plugin
+
 * Sun Feb 18 2018 Alec Leamas <leamas.alec@gmail.com> - 0.6.0-1
 - New upstream version.
 - Drop support for system-wide services.

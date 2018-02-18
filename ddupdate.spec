@@ -1,4 +1,6 @@
-%global gittag      0.5.2
+%global __python __python3
+
+%global gittag      0.6.0
 #global commit      eb302484417d85cbf497958ba2a651f738ad7420
 
 %global shortcommit %{?commit:%(c=%{commit}; echo ${c:0:7})}%{!?commit:%nil}
@@ -6,8 +8,8 @@
 %global srcdir      %{?gittag}%{?commit}
 
 Name:           ddupdate
-Version:        0.5.2
-Release:        2%{?commit:.%{shortcommit}}%{?dist}
+Version:        0.6.0
+Release:        1%{?dist}
 Summary:        Tool updating DNS data for dynamic IP addresses
 
 Group:          Applications/System
@@ -19,7 +21,7 @@ Source0:        %{url}/archive/%{srcdir}/%{name}-%{shortdir}.tar.gz
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
 BuildRequires:  systemd
-Requires(pre):  shadow-utils
+BuildRequires:  /usr/bin/pkg-config
 Requires:       python%{python3_pkgversion}-straight-plugin
 Requires:       /usr/sbin/ip
 Requires:       sudo
@@ -46,7 +48,6 @@ and with NetworkManager templates to run when interfaces goes up or down.
 %prep
 %autosetup -p1 -n %{name}-%{srcdir}
 sed -i '/ExecStart/s|/usr/local|/usr|' systemd/ddupdate.service
-sed -i '/User=/s/.*/User=ddupdate/' systemd/ddupdate.service
 sed -i 's|/lib/systemd/system|%{_unitdir}|' setup.py
 
 
@@ -56,23 +57,7 @@ sed -i 's|/lib/systemd/system|%{_unitdir}|' setup.py
 
 %install
 %py3_install
-rm -rf $RPM_BUILD_ROOT%{_docdir}/ddupdate*/*
-
-
-%pre
-getent group ddupdate >/dev/null || groupadd --system ddupdate
-getent passwd ddupdate >/dev/null || \
-    useradd --system -g ddupdate -d /var/lib/ddupdate -s /sbin/nologin \
-    --create-home -c "Updates dns info for dynamic ip address" ddupdate
-
-%post
-%systemd_post ddupdate.timer
-
-%preun
-%systemd_preun ddupdate.timer
-
-%postun
-%systemd_postun_with_restart ddupdate.timer
+%py_byte_compile %{__python3} %{buildroot}%{_datadir}/ddupdate/plugins
 
 
 %files
@@ -80,7 +65,6 @@ getent passwd ddupdate >/dev/null || \
 %doc README.md NEWS CONTRIBUTE.md CONFIGURATION.md
 %{_bindir}/ddupdate
 %{_bindir}/ddupdate-config
-%config(noreplace) /etc/ddupdate.conf
 %{_unitdir}/ddupdate.*
 %{_datadir}/ddupdate
 %{_datadir}/bash-completion/completions/ddupdate
@@ -91,9 +75,14 @@ getent passwd ddupdate >/dev/null || \
 
 
 %changelog
+* Sun Feb 18 2018 Alec Leamas <leamas.alec@gmail.com> - 0.6.0-1
+- New upstream version.
+- Drop support for system-wide services.
+- New BR pkg-config.
+
 * Wed Feb 07 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.5.2-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
-
+§
 * Sun Jan 28 2018 Alec Leamas <leamas.alec@gmail.com> - 0.5.2-1
 - New upstream release
 

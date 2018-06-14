@@ -1,6 +1,6 @@
 %global __python __python3
 
-%global gittag      0.6.0
+%global gittag      0.6.1
 #global commit      eb302484417d85cbf497958ba2a651f738ad7420
 
 %global shortcommit %{?commit:%(c=%{commit}; echo ${c:0:7})}%{!?commit:%nil}
@@ -8,8 +8,8 @@
 %global srcdir      %{?gittag}%{?commit}
 
 Name:           ddupdate
-Version:        0.6.0
-Release:        2%{?dist}
+Version:        0.6.1
+Release:        1%{?dist}
 Summary:        Tool updating DNS data for dynamic IP addresses
 
 Group:          Applications/System
@@ -74,6 +74,9 @@ sed -i 's|/lib/systemd/system|%{_unitdir}|' setup.py
 
 
 %changelog
+* Thu Jun 14 2018 Alec Leamas <leamas.alec@gmail.com> - 0.6.1-1
+- New upstream maintenance release.
+
 * Sun Feb 18 2018 Alec Leamas <leamas.alec@gmail.com> - 0.6.0-2
 - Drop redundant R: python3-straight-plugin
 

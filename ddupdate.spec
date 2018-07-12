@@ -9,7 +9,7 @@
 
 Name:           ddupdate
 Version:        0.6.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Tool updating DNS data for dynamic IP addresses
 
 Group:          Applications/System
@@ -74,6 +74,9 @@ sed -i 's|/lib/systemd/system|%{_unitdir}|' setup.py
 
 
 %changelog
+* Thu Jul 12 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.6.1-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
+
 * Tue Jun 19 2018 Miro Hrončok <mhroncok@redhat.com> - 0.6.1-2
 - Rebuilt for Python 3.7
 

@@ -12,7 +12,6 @@ Version:        0.6.1
 Release:        3%{?dist}
 Summary:        Tool updating DNS data for dynamic IP addresses
 
-Group:          Applications/System
 License:        MIT
 URL:            http://github.com/leamas/ddupdate
 BuildArch:      noarch

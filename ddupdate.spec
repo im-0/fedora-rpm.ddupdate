@@ -9,7 +9,7 @@
 
 Name:           ddupdate
 Version:        0.6.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Tool updating DNS data for dynamic IP addresses
 
 Group:          Applications/System
@@ -74,6 +74,9 @@ sed -i 's|/lib/systemd/system|%{_unitdir}|' setup.py
 
 
 %changelog
+* Thu Mar 07 2019 Troy Dawson <tdawson@redhat.com> - 0.6.0-3
+- Rebuilt to change main python from 3.4 to 3.6
+
 * Sun Feb 18 2018 Alec Leamas <leamas.alec@gmail.com> - 0.6.0-2
 - Drop redundant R: python3-straight-plugin
 

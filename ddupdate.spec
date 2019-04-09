@@ -1,6 +1,6 @@
 %global __python __python3
 
-%global gittag      0.6.1
+%global gittag      0.6.2
 #global commit      eb302484417d85cbf497958ba2a651f738ad7420
 
 %global shortcommit %{?commit:%(c=%{commit}; echo ${c:0:7})}%{!?commit:%nil}
@@ -8,8 +8,8 @@
 %global srcdir      %{?gittag}%{?commit}
 
 Name:           ddupdate
-Version:        0.6.1
-Release:        4%{?dist}
+Version:        0.6.2
+Release:        1%{?dist}
 Summary:        Tool updating DNS data for dynamic IP addresses
 
 License:        MIT
@@ -73,6 +73,9 @@ sed -i 's|/lib/systemd/system|%{_unitdir}|' setup.py
 
 
 %changelog
+* Tue Apr 09 2019 Alec Leamas <leamas.alec@gmail.com> - 0.6.2-1
+- new version
+
 * Thu Jan 31 2019 Fedora Release Engineering <releng@fedoraproject.org> - 0.6.1-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
 

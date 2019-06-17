@@ -8,7 +8,7 @@
 %global srcdir      %{?gittag}%{?commit}
 
 Name:           ddupdate
-Version:        0.6.2
+Version:        0.6.3
 Release:        1%{?dist}
 Summary:        Tool updating DNS data for dynamic IP addresses
 
@@ -73,6 +73,10 @@ sed -i 's|/lib/systemd/system|%{_unitdir}|' setup.py
 
 
 %changelog
+* Mon Jun 17 2019 Alec Leamas <leamas.alec@gmail.com> - 0.6.3-1
+- New upstream version
+- Fixes upstream #21, ipv6 config file parsing bug.
+
 * Tue Apr 09 2019 Alec Leamas <leamas.alec@gmail.com> - 0.6.2-1
 - new version
 

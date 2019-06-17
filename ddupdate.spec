@@ -1,6 +1,6 @@
 %global __python __python3
 
-%global gittag      0.6.2
+%global gittag      0.6.3
 #global commit      eb302484417d85cbf497958ba2a651f738ad7420
 
 %global shortcommit %{?commit:%(c=%{commit}; echo ${c:0:7})}%{!?commit:%nil}

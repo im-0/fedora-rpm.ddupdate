@@ -9,7 +9,7 @@
 
 Name:           ddupdate
 Version:        0.6.4
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Tool updating DNS data for dynamic IP addresses
 
 License:        MIT
@@ -74,6 +74,9 @@ sed -i '/cmdclass=/s/^/#/' setup.py
 
 
 %changelog
+* Thu Oct 03 2019 Miro Hrončok <mhroncok@redhat.com> - 0.6.4-4
+- Rebuilt for Python 3.8.0rc1 (#1748018)
+
 * Mon Aug 19 2019 Miro Hrončok <mhroncok@redhat.com> - 0.6.4-3
 - Rebuilt for Python 3.8
 

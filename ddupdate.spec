@@ -9,7 +9,7 @@
 
 Name:           ddupdate
 Version:        0.6.4
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        Tool updating DNS data for dynamic IP addresses
 
 License:        MIT
@@ -74,6 +74,9 @@ sed -i '/cmdclass=/s/^/#/' setup.py
 
 
 %changelog
+* Tue May 26 2020 Miro Hrončok <mhroncok@redhat.com> - 0.6.4-6
+- Rebuilt for Python 3.9
+
 * Tue Jan 28 2020 Fedora Release Engineering <releng@fedoraproject.org> - 0.6.4-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 

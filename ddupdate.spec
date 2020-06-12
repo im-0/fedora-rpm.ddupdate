@@ -1,17 +1,24 @@
 %global __python __python3
 
-%global gittag      0.6.4
+%global gittag      0.6.5
 #global commit      eb302484417d85cbf497958ba2a651f738ad7420
 
 %global shortcommit %{?commit:%(c=%{commit}; echo ${c:0:7})}%{!?commit:%nil}
 %global shortdir    %{?gittag}%{?shortcommit}
 %global srcdir      %{?gittag}%{?commit}
 
+# mageia 6- fix:
+%{!?_userunitdir: %global _userunitdir /usr/lib/systemd/system}
+
+#Suse fix:
+%{!?python3_pkgversion:%global python3_pkgversion 3}
+
 Name:           ddupdate
-Version:        0.6.4
-Release:        6%{?dist}
+Version:        0.6.5
+Release:        1%{?dist}
 Summary:        Tool updating DNS data for dynamic IP addresses
 
+Group:          Applications/System
 License:        MIT
 URL:            http://github.com/leamas/ddupdate
 BuildArch:      noarch
@@ -21,6 +28,7 @@ BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
 BuildRequires:  systemd
 BuildRequires:  /usr/bin/pkg-config
+
 Requires:       /usr/sbin/ip
 Requires:       sudo
 
@@ -37,7 +45,7 @@ address, and only attempts the update if the address actually is changed.
 The tool has a plugin structure with plugins for obtaining the actual
 address (typically hardware-dependent) and to update it (service depen‐
 dent). For supported services, it's a linux-centric, user-friendly and
-flexible alternative to the ubiquotous ddclient.
+flexible alternative to the ubiquitous ddclient.
 
 ddupdate is distributed with systemd support to run at regular intervals,
 and with NetworkManager templates to run when interfaces goes up or down.
@@ -64,7 +72,7 @@ sed -i '/cmdclass=/s/^/#/' setup.py
 %doc README.md NEWS CONTRIBUTE.md CONFIGURATION.md
 %{_bindir}/ddupdate
 %{_bindir}/ddupdate-config
-%{_userunitdir}/ddupdate.*
+%{_userunitdir}/ddupdate*
 %{_datadir}/ddupdate
 %{_datadir}/bash-completion/completions/ddupdate
 %{_mandir}/man8/ddupdate.8*
@@ -74,6 +82,10 @@ sed -i '/cmdclass=/s/^/#/' setup.py
 
 
 %changelog
+* Fri Jun 12 2020 Alec Leamas <leamas.alec@nowhere.net> - 0.6.5-1
+- New upstream version
+- Some attempts to make it build on opensuse.
+
 * Tue May 26 2020 Miro Hrončok <mhroncok@redhat.com> - 0.6.4-6
 - Rebuilt for Python 3.9
 

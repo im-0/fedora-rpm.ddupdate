@@ -15,7 +15,7 @@
 
 Name:           ddupdate
 Version:        0.6.5
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Tool updating DNS data for dynamic IP addresses
 
 Group:          Applications/System
@@ -82,6 +82,9 @@ sed -i '/cmdclass=/s/^/#/' setup.py
 
 
 %changelog
+* Mon Jul 27 2020 Fedora Release Engineering <releng@fedoraproject.org> - 0.6.5-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
+
 * Fri Jun 12 2020 Alec Leamas <leamas.alec@nowhere.net> - 0.6.5-1
 - New upstream version
 - Some attempts to make it build on opensuse.

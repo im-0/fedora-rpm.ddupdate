@@ -15,7 +15,7 @@
 
 Name:           ddupdate
 Version:        0.6.5
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Tool updating DNS data for dynamic IP addresses
 
 Group:          Applications/System
@@ -29,6 +29,7 @@ BuildRequires:  python%{python3_pkgversion}-setuptools
 BuildRequires:  systemd
 BuildRequires:  /usr/bin/pkg-config
 
+Requires:       python%{python3_pkgversion}-requests
 Requires:       /usr/sbin/ip
 Requires:       sudo
 
@@ -82,6 +83,9 @@ sed -i '/cmdclass=/s/^/#/' setup.py
 
 
 %changelog
+* Thu Feb 18 2021 Ivan Mironov <mironov.ivan@gmail.com> - 0.6.5-4
+- Add python*-requests which is required for Cloudflare plugin
+
 * Tue Jan 26 2021 Fedora Release Engineering <releng@fedoraproject.org> - 0.6.5-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
 
